@@ -41,9 +41,9 @@
                 <DataGridTextColumn Header="Tätigkeit" MinWidth="110" IsReadOnly="True" Binding="{Binding Path=AcitivityText, UpdateSourceTrigger=LostFocus}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Height="30" Grid.Row="3" Grid.Column="0" Margin="10,10,10,10" Command="{Binding CmdEditActivities}">EDIT</Button>
-        <Button Height="30" Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" Command="{Binding CmdCreateActivity}">NEW</Button>
+        <Button Height="30" Grid.Row="3" Grid.Column="0" Margin="10,10,10,10" Command="{Binding CmdCreateActivity}">NEW</Button>
+        <Button Height="30" Grid.Row="3" Grid.Column="1" Margin="10,10,10,10" Command="{Binding CmdEditActivities}">EDIT</Button>
         <Button Height="30" Grid.Row="3" Grid.Column="2" Margin="10,10,10,10" Command="{Binding CmdDeleteActivity}">DELETE</Button>
-        <Button Height="30" Grid.Row="3" Grid.Column="3" Margin="10,10,10,10" Command="{Binding CmdReturnToEmployees}">BACK</Button>
+        <Button Height="30" Grid.Row="3" Grid.Column="3" Margin="10,10,10,10" Command="{Binding CmdReturnToOverview}">BACK</Button>
     </Grid>
 </Window>

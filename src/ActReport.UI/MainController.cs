@@ -8,6 +8,13 @@ namespace ActReport.UI
 {
     public class MainController : IController
     {
+        private Dictionary<BaseViewModel, Window> _windows;
+
+        public MainController()
+        {
+            _windows = new Dictionary<BaseViewModel, Window>();
+        }
+
         public void ShowWindow(BaseViewModel viewModel)
         {
             Window window = viewModel switch
@@ -18,15 +25,22 @@ namespace ActReport.UI
 
                 ActivityViewModel _ => new ActivityWindow(),
 
+                ActivityCreateAndEditModel _ => new ActivityCreateAndEditWindow(),
+
                 _ => throw new InvalidOperationException(nameof(viewModel)),
             };
 
+            _windows[viewModel] = window;
             window.DataContext = viewModel;
             window.ShowDialog();
         }
         public void CloseWindow(BaseViewModel viewModel)
         {
-            throw new NotImplementedException();
+            if(_windows.ContainsKey(viewModel))
+            {
+                _windows[viewModel].Close();
+                _windows.Remove(viewModel);
+            }
         }
 
     }

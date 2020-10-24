@@ -13,7 +13,7 @@ namespace ActReport.ViewModel
     {
         private readonly Employee _employee;
         private ObservableCollection<Activity> _activities { get; set; }
-        
+
         private Activity _selectedActivity;
 
         public ObservableCollection<Activity> Activities
@@ -26,15 +26,15 @@ namespace ActReport.ViewModel
             }
         }
         public string FullName { get => $"{ _employee.FirstName} {_employee.LastName}"; }
-        public Activity SelectedActivity 
-        { 
+        public Activity SelectedActivity
+        {
             get => _selectedActivity;
 
-            set 
+            set
             {
                 _selectedActivity = value;
                 OnPropertyChanged(nameof(SelectedActivity));
-            } 
+            }
         }
 
         public ActivityViewModel(IController controller, Employee employee) : base(controller)
@@ -56,11 +56,11 @@ namespace ActReport.ViewModel
 
         private void Activities_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if(e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
-                using(IUnitOfWork uow = new UnitOfWork())
+                using (IUnitOfWork uow = new UnitOfWork())
                 {
-                    foreach(var item in e.OldItems)
+                    foreach (var item in e.OldItems)
                     {
                         uow.ActivityRepository.Delete((item as Activity).Id);
                     }
@@ -78,7 +78,7 @@ namespace ActReport.ViewModel
                 if (_cmdEditActivities == null)
                 {
                     _cmdEditActivities = new RelayCommand(
-                      execute: _ => _controller.ShowWindow(new ActivityCreateAndEditModel(_controller, SelectedActivity)),
+                      execute: _ => _controller.ShowWindow(new ActivityCreateAndEditModel(_controller, SelectedActivity, _employee)),
                       canExecute: _ => SelectedActivity != null);
                 }
 
@@ -95,8 +95,8 @@ namespace ActReport.ViewModel
                 if (_cmdCreateActivity == null)
                 {
                     _cmdCreateActivity = new RelayCommand(
-                      execute: _ => _controller.ShowWindow(new ActivityCreateAndEditModel(_controller, SelectedActivity)),
-                      canExecute: _ => SelectedActivity != null);
+                      execute: _ => _controller.ShowWindow(new ActivityCreateAndEditModel(_controller, SelectedActivity, _employee)),
+                      canExecute: _ => true);
                 }
 
                 return _cmdCreateActivity;
@@ -104,22 +104,38 @@ namespace ActReport.ViewModel
             set { _cmdCreateActivity = value; }
         }
 
-        private ICommand _cmdDeleteActivity;
-        public ICommand CmdDeleteActivity
+        //private ICommand _cmdDeleteActivity;
+        //public ICommand CmdDeleteActivity
+        //{
+        //    get
+        //    {
+        //        if (_cmdDeleteActivity == null)
+        //        {
+        //            _cmdDeleteActivity = new RelayCommand(
+        //              execute: _ => _controller.ShowWindow(new ActivityCreateAndEditModel(_controller, SelectedActivity)),
+        //              canExecute: _ => SelectedActivity != null);
+        //        }
+
+        //        return _cmdDeleteActivity;
+        //    }
+        //    set { _cmdDeleteActivity = value; }
+        //}
+
+        private ICommand _cmdReturnToOverview;
+        public ICommand CmdReturnToOverview
         {
             get
             {
-                if (_cmdDeleteActivity == null)
+                if (_cmdReturnToOverview == null)
                 {
-                    _cmdDeleteActivity = new RelayCommand(
-                      execute: _ => _controller.ShowWindow(new ActivityCreateAndEditModel(_controller, SelectedActivity)),
-                      canExecute: _ => SelectedActivity != null);
+                    _cmdReturnToOverview = new RelayCommand(
+                    execute: _ => _controller.CloseWindow(this),
+                    canExecute: _ => true);
                 }
 
-                return _cmdDeleteActivity;
+                return _cmdReturnToOverview;
             }
-            set { _cmdDeleteActivity = value; }
+            set => _cmdReturnToOverview = value;
         }
-
     }
 }
