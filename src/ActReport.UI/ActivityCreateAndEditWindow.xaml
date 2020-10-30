@@ -24,8 +24,8 @@
         <TextBlock Height="30" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Ende"/>
         <TextBox Height="30" Width="200" Grid.Column="1" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding ActivityText, StringFormat=dd.MM.yyyy, UpdateSourceTrigger=PropertyChanged}"/>
         <DatePicker Height="30" Width="200" Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedDate="{Binding Date, StringFormat=HH:mm, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short"/>
-        <TextBox Height="30" Width="200" Grid.Column="1" Grid.Row="2" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{Binding StartTime, StringFormat=HH:mm, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Height="30" Width="200" Grid.Column="1" Grid.Row="3" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding EndTime, StringFormat=HH:mm, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Height="30" Width="200" Grid.Column="1" Grid.Row="2" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{Binding Start, StringFormat=HH:mm, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Height="30" Width="200" Grid.Column="1" Grid.Row="3" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding End, StringFormat=HH:mm, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Height="30" Grid.Row="4" Grid.Column="0" Margin="10,10,10,10" Command="{Binding CmdSaveActivities}">SAVE</Button>
         <Button Height="30" Grid.Row="4" Grid.Column="1" Margin="10,10,10,10" Command="{Binding CmdReturnToEmployees}">CANCEL</Button>
     </Grid>

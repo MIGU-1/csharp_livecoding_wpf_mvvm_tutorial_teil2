@@ -22,8 +22,9 @@
             <TextBlock HorizontalAlignment="Center">Tätigkeiten des Mitarbeiters</TextBlock>
             <TextBlock Foreground="DarkBlue" HorizontalAlignment="Center" Text="{Binding FullName}"></TextBlock>
         </StackPanel>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="4" SelectedItem="{Binding SelectedActivity}" ItemsSource="{Binding Activities}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="4" SelectedItem="{Binding SelectedActivity}" ItemsSource="{Binding Activities, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Tätigkeit" MinWidth="200" IsReadOnly="True" Binding="{Binding Path=ActivityText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTemplateColumn Header="Datum" MinWidth="110">
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
@@ -36,9 +37,8 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Von" MinWidth="110" IsReadOnly="True" Binding="{Binding Path = StartTime, StringFormat=HH:mm, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Bis" MinWidth="110" IsReadOnly="True" Binding="{Binding Path= EndTime, StringFormat=HH:mm , UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Tätigkeit" MinWidth="110" IsReadOnly="True" Binding="{Binding Path=AcitivityText, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Von" MinWidth="110" IsReadOnly="True" Binding="{Binding Path = StartTime, StringFormat=HH:mm, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Bis" MinWidth="110" IsReadOnly="True" Binding="{Binding Path= EndTime, StringFormat=HH:mm , UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Height="30" Grid.Row="3" Grid.Column="0" Margin="10,10,10,10" Command="{Binding CmdCreateActivity}">NEW</Button>

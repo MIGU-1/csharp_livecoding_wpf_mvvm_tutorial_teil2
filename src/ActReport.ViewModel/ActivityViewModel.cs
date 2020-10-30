@@ -56,18 +56,20 @@ namespace ActReport.ViewModel
 
         private void Activities_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
-            {
-                using (IUnitOfWork uow = new UnitOfWork())
-                {
-                    foreach (var item in e.OldItems)
-                    {
-                        uow.ActivityRepository.Delete((item as Activity).Id);
-                    }
+            //if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            //{
+            //    using (IUnitOfWork uow = new UnitOfWork())
+            //    {
+            //        foreach (var item in e.OldItems)
+            //        {
+            //            uow.ActivityRepository.Delete((item as Activity).Id);
+            //        }
 
-                    uow.Save();
-                }
-            }
+            //        uow.Save();
+            //    }
+            //}
+
+            LoadActivities();
         }
 
         private ICommand _cmdEditActivities;
