@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ActReport.Core.Entities
 {
-  public class Activity : EntityObject
+  public class Activity : EntityObject, INotifyPropertyChanged
     {
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }
@@ -18,6 +19,13 @@ namespace ActReport.Core.Entities
             Date = DateTime.Now;
             StartTime = DateTime.Parse("01.01.1900 00:00");
             EndTime = DateTime.Parse("01.01.1900 00:00");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPorpertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

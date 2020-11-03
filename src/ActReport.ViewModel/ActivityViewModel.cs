@@ -80,7 +80,11 @@ namespace ActReport.ViewModel
                 if (_cmdEditActivities == null)
                 {
                     _cmdEditActivities = new RelayCommand(
-                      execute: _ => _controller.ShowWindow(new ActivityCreateAndEditModel(_controller, SelectedActivity, _employee)),
+                      execute: _ =>
+                      {
+                          _controller.ShowWindow(new ActivityCreateAndEditModel(_controller, SelectedActivity, _employee));
+                          LoadActivities();
+                      },
                       canExecute: _ => SelectedActivity != null);
                 }
 

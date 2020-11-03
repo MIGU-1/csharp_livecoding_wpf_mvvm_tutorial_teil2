@@ -24,9 +24,10 @@ namespace ActReport.ViewModel
             set
             {
                 _activityText = value;
-                OnPropertyChanged(nameof(ActivityCreateAndEditModel));
+                OnPropertyChanged();
             }
         }
+
         public DateTime Date
         {
             get => _date;
@@ -81,9 +82,11 @@ namespace ActReport.ViewModel
             else
             {
                 _create = true;
-                _activity = new Activity();
-                _activity.Employee = employee;
-                _activity.Employee_Id = employee.Id;
+                _activity = new Activity
+                {
+                    Employee = employee,
+                    Employee_Id = employee.Id
+                };
                 _date = DateTime.Now;
                 _start = DateTime.Now;
                 _end = DateTime.Now;
